@@ -43,3 +43,18 @@
   --rdp-background-color: theme('colors.accent.600') !important;
   margin: 0 !important;
 }
+
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  height: 0; /* Remove horizontal scrollbar space */
+}
+
+body {
+  overflow: overlay; /* Enable overlay scrollbars */
+}
+
+/* For Firefox */
+body {
+  scrollbar-width: thin; /* Hide scrollbar but still scrollable */
+  scrollbar-color: transparent transparent; /* Make scrollbar transparent */
+}

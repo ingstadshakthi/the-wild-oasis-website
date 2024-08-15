@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 const josefin = Josefin_Sans({
   subsets: ['latin'],
   display: 'swap',
+  preload: true,
 });
 
 export const metadata = {
@@ -21,10 +22,10 @@ export const metadata = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={josefin.className}>
-      <body className="bg-primary-950 text-primary-100 min-h-screen antialiased flex flex-col">
+      <body className="bg-primary-950 text-primary-100 min-h-screen antialiased flex flex-col relative">
         <Header />
-        <div className="flex-1 px-8 py-12">
-          <main className="max-w-7xl mx-auto bg-white">{children}</main>
+        <div className="flex-1 px-8 py-12 grid">
+          <main className="max-w-7xl mx-auto w-full">{children}</main>
         </div>
       </body>
     </html>
