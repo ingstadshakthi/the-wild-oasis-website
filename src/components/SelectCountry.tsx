@@ -13,6 +13,7 @@ async function SelectCountry({
   id: any;
   className: any;
 }) {
+  console.log('default country', defaultCountry);
   // const countries = await getCountries();
   // const flag =
   //   countries.find((country) => country.name === defaultCountry)?.flag ?? '';

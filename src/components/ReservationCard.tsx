@@ -10,14 +10,14 @@ export const formatDistanceFromNow = (dateStr: string) =>
 function ReservationCard({ booking }: { booking: any }) {
   const {
     id,
-    guestId,
+    // guestId,
     startDate,
     endDate,
     numNights,
     totalPrice,
     numGuests,
-    status,
-    created_at,
+    // status,
+    createdAt,
     cabins: { name, image },
   } = booking;
 
@@ -62,7 +62,7 @@ function ReservationCard({ booking }: { booking: any }) {
             {numGuests} guest{numGuests > 1 && 's'}
           </p>
           <p className="ml-auto text-sm text-primary-400">
-            Booked {format(new Date(created_at), 'EEE, MMM dd yyyy, p')}
+            Booked {format(new Date(createdAt), 'EEE, MMM dd yyyy, p')}
           </p>
         </div>
       </div>
