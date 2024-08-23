@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Guests" ALTER COLUMN "created_at" SET DEFAULT CURRENT_TIMESTAMP;

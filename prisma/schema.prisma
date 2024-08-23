@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Cabins {
+    id             Int     @id @default(autoincrement())
+    name           String
+    created_at     DateTime @default(now())
+    maxCapacity    Int
+    regularPrice   Int
+    discount       Int
+    description    String
+    image          String
+}
+
+model Guests {
+  id           Int      @id @default(autoincrement())
+  created_at   DateTime @default(now())
+  fullName     String   
+  email        String
+  nationalID   String   
+  nationality  String
+  countryFlag  String
+
+}
+
+model Bookings {
+  id            Int       @id @default(autoincrement())
+  created_at    DateTime  @default(now())
+  startDate     String
+  endDate       String
+  numNights     Int?      // Nullable field
+  numGuests     Int
+  cabinPrice    Float?    // Nullable field
+  extrasPrice   Float?    // Nullable field
+  totalPrice    Float?    // Nullable field
+  status        String?   // Nullable field, possible statuses could be "pending", "confirmed", etc.
+  hasBreakfast  Boolean   @default(false)
+  isPaid        Boolean   @default(false)
+  observations  String?   // Nullable field for additional notes
+  cabinId       Int       // Foreign key to the Cabin model
+  guestId       Int       // Foreign key to the Guest model
+}
+
+model Settings {
+  id               Int      @id @default(autoincrement())
+  created_at        DateTime @default(now())
+  minBookingLength Int
+  maxBookingLength Int
+  maxGuestsPerBooking Int
+  breakfastPrice   Float
+}
