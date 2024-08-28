@@ -6,6 +6,9 @@ export const metadata = {
   title: 'Cabins Page',
 };
 
+// export const revalidate = 0; makes a new request on every call
+export const revalidate = 3600; // fetches data every hour
+
 export default function Page() {
   return (
     <div>
