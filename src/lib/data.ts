@@ -1,14 +1,15 @@
 import { PrismaClient } from '@prisma/client';
+import { notFound } from 'next/navigation';
 
 const prisma = new PrismaClient();
 
-export const getCabins = async () => {
+export async function getCabins() {
     try {
         const data = await prisma.cabins.findMany({
             orderBy: [
                 {
-                    name: 'asc'
-                }
+                    name: 'asc',
+                },
             ],
             select: {
                 id: true,
@@ -17,10 +18,25 @@ export const getCabins = async () => {
                 regularPrice: true,
                 discount: true,
                 image: true,
-            }
-        })
+            },
+        });
         return data;
     } catch (error) {
         return [];
     }
-};
+}
+
+export async function getCabin(id: number) {
+    try {
+        const data = await prisma.cabins.findUnique({
+            where: {
+                id,
+            },
+        });
+        if (!data) notFound();
+        return data;
+    } catch (error) {
+        console.log(`Error getting cabin ${id} data: `, error);
+        notFound();
+    }
+}
