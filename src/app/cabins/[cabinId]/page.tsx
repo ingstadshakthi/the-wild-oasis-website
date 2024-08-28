@@ -1,4 +1,5 @@
-import { CabinsPage } from '@/interfaces/page';
+import TextExpander from '@/components/TextExpander';
+import { CabinPage } from '@/interfaces/page';
 import { getCabin } from '@/lib/data';
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
@@ -7,7 +8,7 @@ import Image from 'next/image';
 //   title: 'Cabin',
 // };
 
-export async function generateMetadata({ params }: CabinsPage) {
+export async function generateMetadata({ params }: CabinPage) {
   const { name } = await getCabin(Number(params.cabinId));
   return {
     title: `Cabin ${name}`,
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: CabinsPage) {
 //   return ids;
 // }
 
-export default async function Page({ params }: CabinsPage) {
+export default async function Page({ params }: CabinPage) {
   const cabin = await getCabin(Number(params.cabinId));
   const { id, name, maxCapacity, regularPrice, discount, image, description } =
     cabin;
@@ -42,7 +43,9 @@ export default async function Page({ params }: CabinsPage) {
             Cabin {name}
           </h3>
 
-          <p className="text-lg text-primary-300 mb-10">{description}</p>
+          <p className="text-lg text-primary-300 mb-10">
+            <TextExpander>{description}</TextExpander>
+          </p>
 
           <ul className="flex flex-col gap-4 mb-7">
             <li className="flex gap-3 items-center">

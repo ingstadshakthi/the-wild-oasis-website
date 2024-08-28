@@ -3,6 +3,12 @@ export interface RootLayoutProps {
 }
 
 export interface CabinsPage {
+    searchParams: {
+        capacity: string;
+    }
+}
+
+export interface CabinPage {
     params: {
         cabinId: string;
     }

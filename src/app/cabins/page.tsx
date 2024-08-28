@@ -1,5 +1,8 @@
 import { CabinList } from '@/components/CabinList';
+import { Filter } from '@/components/Filter';
 import Spinner from '@/components/Spinner';
+import { FilterType } from '@/interfaces/cabin';
+import { CabinsPage } from '@/interfaces/page';
 import { Suspense } from 'react';
 
 export const metadata = {
@@ -9,7 +12,8 @@ export const metadata = {
 // export const revalidate = 0; makes a new request on every call
 export const revalidate = 3600; // fetches data every hour
 
-export default function Page() {
+export default function Page({ searchParams }: CabinsPage) {
+  const filter = (searchParams.capacity ?? 'all') as FilterType;
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
@@ -23,8 +27,11 @@ export default function Page() {
         home away from home. The perfect spot for a peaceful, calm vacation.
         Welcome to paradise.
       </p>
+      <div className="flex justify-end mb-8">
+        <Filter filter={filter} />
+      </div>
       <Suspense fallback={<Spinner />}>
-        <CabinList />
+        <CabinList filter={filter} />
       </Suspense>
     </div>
   );
