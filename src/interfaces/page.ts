@@ -7,3 +7,8 @@ export interface CabinsPage {
         cabinId: string;
     }
 }
+
+export interface ErrorPage {
+    error: { message: string };
+    reset: () => void;
+}
