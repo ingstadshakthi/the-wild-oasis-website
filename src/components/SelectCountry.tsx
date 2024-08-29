@@ -1,39 +1,25 @@
-// import { getCountries } from '@/app/_lib/data-service';
+import { SelectCountryProps } from '@/interfaces/components';
+import { Country } from '@/interfaces/utils';
+import { getCountries } from '@/lib/data';
 
-// Let's imagine your colleague already built this component 😃
-
-async function SelectCountry({
+export async function SelectCountry({
   defaultCountry,
   name,
   id,
   className,
-}: {
-  defaultCountry: any;
-  name: any;
-  id: any;
-  className: any;
-}) {
-  console.log('default country', defaultCountry);
-  // const countries = await getCountries();
-  // const flag =
-  //   countries.find((country) => country.name === defaultCountry)?.flag ?? '';
-
+}: SelectCountryProps) {
+  const countries: Country[] = await getCountries();
+  const flag =
+    countries.find((country) => country.name === defaultCountry)?.flag ?? '';
+  console.log('flag', flag);
   return (
-    <select
-      name={name}
-      id={id}
-      // Here we use a trick to encode BOTH the country name and the flag into the value. Then we split them up again later in the server action
-      // defaultValue={`${defaultCountry}%${flag}`}
-      className={className}
-    >
+    <select name={name} id={id} className={className}>
       <option value="">Select country...</option>
-      {/* {countries.map((c) => (
+      {countries.map((c) => (
         <option key={c.name} value={`${c.name}%${c.flag}`}>
           {c.name}
         </option>
-      ))} */}
+      ))}
     </select>
   );
 }
-
-export default SelectCountry;
