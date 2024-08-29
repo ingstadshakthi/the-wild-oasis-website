@@ -1,5 +1,6 @@
 import { CabinList } from '@/components/CabinList';
 import { Filter } from '@/components/Filter';
+import ReservationReminder from '@/components/ReservationReminder';
 import Spinner from '@/components/Spinner';
 import { FilterType } from '@/interfaces/cabin';
 import { CabinsPage } from '@/interfaces/page';
@@ -32,6 +33,7 @@ export default function Page({ searchParams }: CabinsPage) {
       </div>
       <Suspense fallback={<Spinner />}>
         <CabinList filter={filter} />
+        <ReservationReminder />
       </Suspense>
     </div>
   );
