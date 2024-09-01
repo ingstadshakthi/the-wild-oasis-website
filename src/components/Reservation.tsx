@@ -1,14 +1,17 @@
 import React from 'react';
 import { getBookedDatesByCabinId, getSettings } from '@/lib/data';
 import { ReservationProps } from '@/interfaces/components';
+import { auth } from '@/lib/auth';
 import DateSelector from './DateSelector';
 import ReservationForm from './ReservationForm';
+import LoginMessage from './LoginMessage';
 
 export async function Reservation({ cabin }: ReservationProps) {
   const [settings, bookedDates] = await Promise.all([
     getSettings(),
     getBookedDatesByCabinId(cabin.id),
   ]);
+  const session = await auth();
   if (!settings || !bookedDates) {
     return;
   }
@@ -19,7 +22,11 @@ export async function Reservation({ cabin }: ReservationProps) {
         bookedDates={bookedDates}
         cabin={cabin}
       />
-      <ReservationForm cabin={cabin} />
+      {session?.user ? (
+        <ReservationForm cabin={cabin} user={session.user} />
+      ) : (
+        <LoginMessage />
+      )}
     </div>
   );
 }
