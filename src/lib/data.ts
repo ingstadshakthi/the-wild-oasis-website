@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { Guests, PrismaClient } from '@prisma/client';
 import { notFound } from 'next/navigation';
 import { eachDayOfInterval } from 'date-fns';
 
@@ -89,10 +89,36 @@ export async function getBookedDatesByCabinId(cabinId: number) {
     // Converting to actual dates to be displayed in the date picker
     const bookedDates = bookings
         .map((booking) => eachDayOfInterval({
-                start: new Date(booking.startDate),
-                end: new Date(booking.endDate),
-            }))
+            start: new Date(booking.startDate),
+            end: new Date(booking.endDate),
+        }))
         .flat();
 
     return bookedDates;
+}
+
+export async function getGuest(email: string): Promise<Guests | null> {
+    try {
+        const guest = await prisma.guests.findFirst({
+            where: {
+                email,
+            },
+        });
+        return guest;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+export async function createGuest(newGuest: { email: string, fullName: string }): Promise<Guests> {
+    try {
+        const guest = await prisma.guests.create({
+            data: newGuest,
+        });
+        return guest;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Guest could not be created');
+    }
 }

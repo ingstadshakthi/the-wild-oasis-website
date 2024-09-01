@@ -16,6 +16,7 @@
     "jsx-a11y/label-has-associated-control": "off",
     "import/prefer-default-export": "off",
     "react/self-closing-comp": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "no-param-reassign": "off"
   }
 }

@@ -29,9 +29,9 @@ model Guests {
   created_at   DateTime @default(now())
   fullName     String   
   email        String
-  nationalID   String   
-  nationality  String
-  countryFlag  String
+  nationalID   String?
+  nationality  String?
+  countryFlag  String?
 
 }
 
