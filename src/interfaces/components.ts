@@ -1,5 +1,6 @@
 import { Cabins, Settings } from '@prisma/client';
 import { GetCabinsData } from './cabin';
+import { User } from './utils';
 
 export interface UpdateProfileFormProps {
     children: React.ReactNode;
@@ -28,10 +29,5 @@ export interface DateSelectorProps {
 
 export interface ReservationFormProps {
     cabin: GetCabinsData;
-    user: {
-        id?: string
-        name?: string | null
-        email?: string | null
-        image?: string | null
-    }
+    user: User
 }
