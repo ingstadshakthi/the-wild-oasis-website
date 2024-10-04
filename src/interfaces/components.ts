@@ -31,3 +31,8 @@ export interface ReservationFormProps {
     cabin: GetCabinsData;
     user: User
 }
+
+export interface SubmitButtonProps {
+    children: React.ReactNode;
+    pendingLabel: string;
+}
