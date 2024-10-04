@@ -1,13 +1,25 @@
 'use client';
 
-export function UpdateProfileForm({ children }: { children: React.ReactNode }) {
-  const countryFlag = 'https://flagcdn.com/in.svg';
+import { updateProfile } from '@/lib/action';
+
+export function UpdateProfileForm({
+  children,
+  guest,
+}: {
+  children: React.ReactNode;
+  guest: any;
+}) {
+  const { fullName, countryFlag, email, nationalID } = guest;
 
   return (
-    <form className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
+    <form
+      className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col"
+      action={updateProfile}
+    >
       <div className="space-y-2">
         <label htmlFor="name">Full name</label>
         <input
+          defaultValue={fullName}
           id="name"
           name="name"
           disabled
@@ -18,6 +30,7 @@ export function UpdateProfileForm({ children }: { children: React.ReactNode }) {
       <div className="space-y-2">
         <label htmlFor="email">Email address</label>
         <input
+          defaultValue={email}
           id="email"
           name="email"
           disabled
@@ -29,7 +42,7 @@ export function UpdateProfileForm({ children }: { children: React.ReactNode }) {
         <div className="flex items-center justify-between">
           <label htmlFor="nationality">Where are you from?</label>
           <img
-            src={countryFlag}
+            src={`${countryFlag}`}
             alt="Country flag"
             className="h-5 rounded-sm"
           />
@@ -40,6 +53,7 @@ export function UpdateProfileForm({ children }: { children: React.ReactNode }) {
       <div className="space-y-2">
         <label htmlFor="nationalID">National ID number</label>
         <input
+          defaultValue={nationalID || ''}
           name="nationalID"
           id="nationalID"
           className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
@@ -48,7 +62,7 @@ export function UpdateProfileForm({ children }: { children: React.ReactNode }) {
 
       <div className="flex justify-end items-center gap-6">
         <button
-          type="button"
+          type="submit"
           className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300"
         >
           Update profile
